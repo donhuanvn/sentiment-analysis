@@ -72,3 +72,18 @@ main {
   border-radius: 20px;
   margin-bottom: 10px;
 }
+.result__item:last-of-type {
+  margin-bottom: 200px;
+}
+.status {
+  background-color: rgba(0, 0, 0, 0.199);
+}
+.status p {
+  color: black;
+}
+.backdrop {
+  display: none;
+}
+.filter {
+  display: none;
+}

@@ -178,6 +178,30 @@
       </ul>
     </div>
   </main>
+  <div class="status">
+    <p>Analyzer is ready!</p>
+    <div class="loading"><div></div><div></div><div></div></div>
+  </div>
+  <div class="filter">
+    <h1>Filter</h1>
+    <form class="form__filter">
+      <div class="form-control__filter">
+        <label for="maxTweets">Maximum Tweets</label>
+        <input type="number" name="maxTweets" placeholder="1000"/>
+      </div>
+      <div class="form-control__filter">
+        <label for="maxTweets">Start Time</label>
+        <input type="datetime" name="maxTweets" placeholder="2022/05/18 06:00"/>
+      </div>
+      <div class="form-control__filter">
+        <label for="maxTweets">End Time</label>
+        <input type="datetime" name="maxTweets" placeholder="2022/05/18 08:00"/>
+      </div>
+      <button type="submit">OK</button>
+      <button type="submit">Cancel</button>
+    </form>
+  </div>
+  <div class="backdrop"></div>
   <script src="./test.js"></script>
 </body>
 
