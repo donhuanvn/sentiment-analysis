@@ -28,7 +28,7 @@ function VisualPage(props) {
   let { resultId } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/history/${resultId}`)
+    fetch(`http://localhost:9000/history/${resultId}`)
       .then(response => {
         if (response.status === 204) {
           return setListData([])
@@ -56,7 +56,7 @@ function VisualPage(props) {
     setIsSubmitting(true)
     setShowHistory(false)
 
-    fetch('http://localhost:5000/search', {
+    fetch('http://localhost:9000/search', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

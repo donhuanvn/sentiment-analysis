@@ -39,7 +39,7 @@ function SearchPage(props) {
     setIsSubmitting(true)
     setShowHistory(false)
 
-    fetch('http://localhost:5000/search', {
+    fetch('http://localhost:9000/search', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

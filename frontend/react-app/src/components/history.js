@@ -10,7 +10,7 @@ function History(props) {
   const origin = new URL(window.location.href).origin
 
   useEffect(() => {
-    fetch('http://localhost:5000/history')
+    fetch('http://localhost:9000/history')
       .then(response => response.json())
       .then(jsonData => {
         setListData(jsonData)
