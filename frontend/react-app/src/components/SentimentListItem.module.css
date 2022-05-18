@@ -1,0 +1,28 @@
+.sentiment__item {
+  width: 97%;
+  min-height: 200px;
+  border: 1px solid #8d8d8d;
+  border-radius: 5px;
+  margin-top: 16px;
+  padding: 8px 16px;
+  background: white;
+  position: relative;
+}
+.sentiment__item:first-of-type {
+  margin-top: 22px;
+}
+.sentiment__item:last-of-type {
+  margin-bottom: 64px;
+}
+/* .sentiment__item a {
+  text-decoration: none;
+  color: black;
+  padding: 5px;
+  display: block;
+}
+.sentiment__item a:hover {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+} */
+.sentiment__item * {
+  overflow: hidden;
+}

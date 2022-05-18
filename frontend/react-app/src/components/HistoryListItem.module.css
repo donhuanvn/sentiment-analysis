@@ -1,0 +1,19 @@
+.history__item {
+  text-align: left;
+  border: 1px solid #8d8d8d;
+  border-radius: 5px;
+  margin: 6px;
+  background: white;
+}
+.history__item a {
+  text-decoration: none;
+  color: black;
+  padding: 5px;
+  display: block;
+}
+.history__item a:hover {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.history__item * {
+  overflow: hidden;
+}
