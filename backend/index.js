@@ -1,9 +1,10 @@
 const path = require('path')
-
+const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const syncWithClients = require('./sync-with-clients')
 const utils = require('./utils')
 utils.initializeForFristRun()
 
@@ -11,6 +12,8 @@ const sentimentController = require('./controllers/twitter-sentiment')
 const errorController = require('./controllers/error')
 
 const app = express();
+const server = http.createServer(app);
+syncWithClients.init(server)
 
 app.use(cors())
 
@@ -31,4 +34,4 @@ app.get('/history/:resultId', sentimentController.getHistoryData)
 
 app.use(errorController.get404);
 
-app.listen(5000);
+server.listen(5000);

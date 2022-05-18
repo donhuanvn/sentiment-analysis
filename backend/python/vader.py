@@ -50,10 +50,14 @@ def main():
     parser.add_argument('--username', type=str)
     parser.add_argument('--conversation-id', type=str)
     parser.add_argument('--max-tweets', type=int, default=1000)
+    parser.add_argument('--start-time', type=str)
+    parser.add_argument('--end-time', type=str)
     parser.add_argument('--output', type=str)
 
     # args.username, args.conversation_id, args.max_tweets, args.output
     args = parser.parse_args()
+
+    time.sleep(5)
 
     # fake
     filename = os.path.join(os.getcwd(), '..', 'data', '{}.json'.format(args.output))

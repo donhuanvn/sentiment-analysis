@@ -7,14 +7,16 @@ exports.getIndex = (req, res, next) => {
 }
 
 exports.postSearchTerm = (req, res, next) => {
-  const { searchTerm, maxTweets } = req.body
+  const { searchTerm, maxTweets, startTime, endTime, analyzer } = req.body
 
   if (Analysis.getStatus() === 'ready') {
-    Analysis.vader(searchTerm, maxTweets, (resultId) => {
-      if (resultId !== '')
-        History.push(resultId)
-    })
-
+    if (analyzer === 'vader') {
+      Analysis.vader(searchTerm, { maxTweets, startTime, endTime }, (resultId) => {
+        if (resultId !== '')
+          History.push(resultId)
+      })
+    }
+    
     return res.status(200).end()
   }
 
