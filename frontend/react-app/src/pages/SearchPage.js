@@ -15,7 +15,7 @@ function SearchPage(props) {
   const [showHistory, setShowHistory] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [maxTweets, setMaxTweets] = useState(1000)
+  const [maxTweets, setMaxTweets] = useState(10)
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
   const [analyzer, setAnalyzer] = useState('vader')

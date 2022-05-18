@@ -18,9 +18,10 @@ function VisualPage(props) {
   const [showNotification, setShowNotification] = useState(false)
   const [showHistory, setShowHistory] = useState(false)
   const [listData, setListData] = useState([])
-  const [maxTweets, setMaxTweets] = useState(1000)
+  const [maxTweets, setMaxTweets] = useState(10)
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
+  const [analyzer, setAnalyzer] = useState('vader')
 
   const searchInputRef = useRef()
 
@@ -60,7 +61,7 @@ function VisualPage(props) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ searchTerm: enteredSearch, maxTweets })
+      body: JSON.stringify({ searchTerm: enteredSearch, maxTweets, startTime, endTime, analyzer })
     })
       .then(data => {
         console.log('Success:', data)
@@ -126,7 +127,7 @@ function VisualPage(props) {
         <SentimentList listData={listData} />
       </main>
       <StatusBar />
-      {showSettings && <SearchSettings onReturn={onReturnSettingsHandler} maxTweets={maxTweets} startTime={startTime} endTime={endTime} />}
+      {showSettings && <SearchSettings onReturn={onReturnSettingsHandler} maxTweets={maxTweets} startTime={startTime} endTime={endTime} analyzer={analyzer}/>}
       {showHistory && <History onClose={onClickBtnHistoryHandler} />}
     </div>
   )

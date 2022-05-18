@@ -19,6 +19,8 @@ const push = (resultId) => {
     username,
     conversationId,
     analysisTime: data['analysis_time'],
+    processingTime: data['processing_time'],
+    analyzer: data['analyzer'],
     timestamp: new Date().getTime()
   }
 
@@ -42,20 +44,20 @@ const readList = () => {
   const history = JSON.parse(content)
 
   const transformedHistory = history.map(item => {
-    if (item.username)
-      return {
-        resultId: item.resultId,
-        username: item.username,
-        analysisTime: item.analysisTime,
-        timestamp: item.timestamp
-      }
-    else
-      return {
-        resultId: item.resultId,
-        conversationId: item.conversationId,
-        analysisTime: item.analysisTime,
-        timestamp: item.timestamp
-      }
+    const result = {
+      resultId: item.resultId,
+      username: item.username,
+      analysisTime: item.analysisTime,
+      processingTime: item.processingTime,
+      analyzer: item.analyzer,
+      timestamp: item.timestamp,
+    }
+    if (item.username) {
+      result.username = item.username
+    } else {
+      result.conversationId = item.conversationId
+    }
+    return result
   })
 
   return transformedHistory

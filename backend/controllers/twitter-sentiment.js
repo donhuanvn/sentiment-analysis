@@ -1,4 +1,5 @@
 const Analysis = require('../models/analysis')
+const { STATUS_READY, STATUS_BUSY } = Analysis
 const History = require('../models/history')
 
 exports.getIndex = (req, res, next) => {
@@ -9,14 +10,19 @@ exports.getIndex = (req, res, next) => {
 exports.postSearchTerm = (req, res, next) => {
   const { searchTerm, maxTweets, startTime, endTime, analyzer } = req.body
 
-  if (Analysis.getStatus() === 'ready') {
+  if (Analysis.getStatus() === STATUS_READY) {
     if (analyzer === 'vader') {
       Analysis.vader(searchTerm, { maxTweets, startTime, endTime }, (resultId) => {
         if (resultId !== '')
           History.push(resultId)
       })
+    } else if (analyzer === 'lstm') {
+      Analysis.lstm(searchTerm, { maxTweets, startTime, endTime }, (resultId) => {
+        if (resultId !== '')
+          History.push(resultId)
+      })
     }
-    
+
     return res.status(200).end()
   }
 
