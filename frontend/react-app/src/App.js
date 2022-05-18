@@ -1,11 +1,12 @@
 import { Route, Switch } from 'react-router-dom'
 
+import SocketProvider from './components/SocketContext/provider';
 import SearchPage from './pages/SearchPage'
 import VisualPage from './pages/VisualPage';
 
 function App() {
   return (
-    <div>
+    <SocketProvider>
       <Switch>
         <Route path={['/', '/index.html']} exact>
           <SearchPage />
@@ -14,7 +15,7 @@ function App() {
           <VisualPage />
         </Route>
       </Switch>
-    </div>
+    </SocketProvider>
   );
 }
 

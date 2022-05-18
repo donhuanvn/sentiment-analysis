@@ -3,15 +3,24 @@ import { useParams } from "react-router-dom";
 
 import History from '../components/history'
 import SentimentList from '../components/SentimentList'
+import SearchSettings from '../components/SearchSettings'
+import StatusBar from '../components/StatusBar'
 
 import classes from './VisualPage.module.css'
 
+import moment from 'moment'
+
+const FORMAT_TIME = 'YYYY/MM/DD HH:mm'
+
 function VisualPage(props) {
+  const [showSettings, setShowSettings] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [showHistory, setShowHistory] = useState(false)
   const [listData, setListData] = useState([])
   const [maxTweets, setMaxTweets] = useState(1000)
+  const [startTime, setStartTime] = useState('')
+  const [endTime, setEndTime] = useState('')
 
   const searchInputRef = useRef()
 
@@ -29,6 +38,11 @@ function VisualPage(props) {
           })
       })
       .catch(err => console.error('Error:', err))
+
+    const startTime = moment().subtract(moment.duration(7, 'days')).format(FORMAT_TIME)
+    setStartTime(startTime)
+    const endTime = moment().format(FORMAT_TIME)
+    setEndTime(endTime)
   }, [resultId])
 
   function submitHandler(event) {
@@ -71,6 +85,19 @@ function VisualPage(props) {
     }
   }
 
+  function onClickBtnSettingsHandler(event) {
+    event.preventDefault()
+    setShowSettings(true)
+  }
+
+  function onReturnSettingsHandler(settings) {
+    setShowSettings(false)
+
+    setMaxTweets(settings.maxTweets)
+    setStartTime(settings.startTime)
+    setEndTime(settings.endTime)
+  }
+
   return (
     <div>
       <header>
@@ -81,7 +108,7 @@ function VisualPage(props) {
           <div className={classes.input__url}>
             <img src="../images/user.png" alt="user icon" />
             <input type="text" name="user" id="user" ref={searchInputRef} />
-            <img src="../images/edit.png" alt="edit icon" className={classes.img__edit} />
+            <img src="../images/edit.png" alt="edit icon" className={classes.img__edit} onClick={onClickBtnSettingsHandler}/>
           </div>
           <div className={classes.buttons}>
             <button type="submit" className={classes.button} disabled={isSubmitting}>Analysis</button>
@@ -98,6 +125,8 @@ function VisualPage(props) {
         }
         <SentimentList listData={listData} />
       </main>
+      <StatusBar />
+      {showSettings && <SearchSettings onReturn={onReturnSettingsHandler} maxTweets={maxTweets} startTime={startTime} endTime={endTime} />}
       {showHistory && <History onClose={onClickBtnHistoryHandler} />}
     </div>
   )

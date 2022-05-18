@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
 
 import History from '../components/history'
-import SearchFilter from '../components/SearchFilter'
+import SearchSettings from '../components/SearchSettings'
 import StatusBar from '../components/StatusBar'
 
 import classes from './SearchPage.module.css'
@@ -11,13 +11,14 @@ import moment from 'moment'
 const FORMAT_TIME = 'YYYY/MM/DD HH:mm'
 
 function SearchPage(props) {
-  const [showFilter, setShowFilter] = useState(true)
+  const [showSettings, setShowSettings] = useState(false)
   const [showHistory, setShowHistory] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [maxTweets, setMaxTweets] = useState(1000)
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
+  const [analyzer, setAnalyzer] = useState('vader')
 
   const searchInputRef = useRef()
 
@@ -43,7 +44,7 @@ function SearchPage(props) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ searchTerm: enteredSearch, maxTweets })
+      body: JSON.stringify({ searchTerm: enteredSearch, maxTweets, startTime, endTime, analyzer })
     })
       .then(data => {
         console.log('Success:', data)
@@ -68,17 +69,20 @@ function SearchPage(props) {
     }
   }
 
-  function onClickBtnFilterHandler(event) {
+  function onClickBtnSettingsHandler(event) {
     event.preventDefault()
-    setShowFilter(true)
+    setShowSettings(true)
   }
 
-  function onReturnFilterHandler(filter) {
-    setShowFilter(false)
+  function onReturnSettingsHandler(settings) {
+    setShowSettings(false)
 
-    setMaxTweets(filter.maxTweets)
-    setStartTime(filter.startTime)
-    setEndTime(filter.endTime)
+    console.log(settings)
+
+    setMaxTweets(settings.maxTweets)
+    setStartTime(settings.startTime)
+    setEndTime(settings.endTime)
+    setAnalyzer(settings.analyzer)
   }
 
   return (
@@ -89,7 +93,7 @@ function SearchPage(props) {
           <div className={classes.input__url}>
             <img src='images/user.png' alt='user icon' />
             <input type="text" name="user" id="user" ref={searchInputRef} />
-            <img src="images/edit.png" alt="edit icon" className={classes.img__edit} onClick={onClickBtnFilterHandler} />
+            <img src="images/edit.png" alt="edit icon" className={classes.img__edit} onClick={onClickBtnSettingsHandler} />
           </div>
         </div>
         <div>
@@ -103,8 +107,8 @@ function SearchPage(props) {
           Analysis process is completed! Please press History and then navigate to the result.
         </div>
       }
-      <StatusBar isLoading={true} />
-      {showFilter && <SearchFilter onReturn={onReturnFilterHandler} maxTweets={maxTweets} startTime={startTime} endTime={endTime} />}
+      <StatusBar />
+      {showSettings && <SearchSettings onReturn={onReturnSettingsHandler} maxTweets={maxTweets} startTime={startTime} endTime={endTime} analyzer={analyzer}/>}
       {showHistory && <History onClose={onClickBtnHistoryHandler} />}
     </section>
   )

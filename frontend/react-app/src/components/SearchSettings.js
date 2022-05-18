@@ -1,13 +1,18 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 import moment from 'moment'
 
-import classes from './SearchFilter.module.css'
+import classes from './SearchSettings.module.css'
 
 const FORMAT_TIME = 'YYYY/MM/DD HH:mm'
 
-function SearchFilter(props) {
+function SearchSettings(props) {
   const [feedback, setFeedback] = useState('')
+  const [analyzer, setAnalyzer] = useState('')
+
+  useEffect(() => {
+    setAnalyzer(props.analyzer)
+  }, [])
 
   const maxTweetsInputRef = useRef()
   const startTimeInputRef = useRef()
@@ -59,7 +64,8 @@ function SearchFilter(props) {
     props.onReturn({
       maxTweets: enteredMaxTweets,
       startTime: enteredStartTime,
-      endTime: enteredEndTime
+      endTime: enteredEndTime,
+      analyzer
     })
   }
 
@@ -68,22 +74,46 @@ function SearchFilter(props) {
     props.onReturn({ ...props })
   }
 
+  function onAnalyzerChangeHandler(event) {
+    // event.preventDefault()
+    event.stopPropagation()
+    let selectedAnalyzer
+    if (event.target.nodeName === 'LABEL') {
+      selectedAnalyzer = event.target.htmlFor
+    }
+    else {
+      selectedAnalyzer = event.target.name
+    }
+    setAnalyzer(selectedAnalyzer)
+  }
+
   return (
     <div>
-      <div className={classes.filter}>
-        <h1>Filter</h1>
-        <form className={classes.form__filter}>
-          <div className={classes.form_control__filter}>
+      <div className={classes.settings}>
+        <h1>Settings</h1>
+        <form className={classes.form__settings}>
+          <div className={classes.form_control__settings}>
             <label htmlFor="maxTweets">Maximum Tweets</label>
             <input type="number" name="maxTweets" placeholder={props.maxTweets} ref={maxTweetsInputRef} />
           </div>
-          <div className={classes.form_control__filter}>
+          <div className={classes.form_control__settings}>
             <label htmlFor="startTime">Start Time</label>
             <input type="datetime" name="startTime" placeholder={props.startTime} ref={startTimeInputRef} />
           </div>
-          <div className={classes.form_control__filter}>
+          <div className={classes.form_control__settings}>
             <label htmlFor="endTime">End Time</label>
             <input type="datetime" name="endTime" placeholder={props.endTime} ref={endTimeInputRef} />
+          </div>
+          <div className={classes.form_control__settings} >
+            <p>Please select an anlyzer:</p>
+            <div onClick={onAnalyzerChangeHandler}>
+              <input type="radio" name="vader" value="vader" checked={analyzer === 'vader'} onChange={() => { }} />
+              <label htmlFor="vader">VADER</label>
+            </div>
+            <div onClick={onAnalyzerChangeHandler}>
+              <input type="radio" name="lstm" value="lstm" checked={analyzer === 'lstm'} onChange={() => { }} />
+              <label htmlFor="lstm">LSTM</label>
+            </div>
           </div>
           {!!feedback && <div className={classes.feedback}>{feedback}</div>}
           <button type="submit" onClick={onClickOkHandler}>OK</button>
@@ -95,4 +125,4 @@ function SearchFilter(props) {
   )
 }
 
-export default SearchFilter
+export default SearchSettings
