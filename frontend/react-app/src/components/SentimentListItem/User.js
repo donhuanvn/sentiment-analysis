@@ -38,7 +38,7 @@ function User(props) {
       },
       title: {
         display: true,
-        text: `Sentiment Analysis Result of User ID #${props.data.conversationId}`,
+        text: `Sentiment Analysis Result of Conversation ID #${props.data.conversationId}`,
       },
     },
     scales: {
