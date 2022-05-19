@@ -68,12 +68,12 @@ const getHistoryData = (resultId) => {
     let content = fs.readFileSync(path.join(DATA_DIR, `${resultId}.json`))
     const data = JSON.parse(content)
 
-    if (data.username)
+    if (data.username)  // a user has multiple conversations, each one has multiple reply tweets
       return data.sentiment_data.map(item => ({
         conversationId: item.conversation_id,
         sentimentData: { ...item.sentiment_data }
       }))
-    else
+    else // only one conversation 
       return [{
         conversationId: data.conversation_id,
         sentimentData: { ...data.sentiment_data }

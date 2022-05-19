@@ -9,7 +9,7 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
-import classes from './Conversation.module.css'
+import classes from './SentimentChart.module.css'
 
 ChartJS.register(
   CategoryScale,
@@ -20,33 +20,23 @@ ChartJS.register(
   Legend
 );
 
-
-function Conversation(props) {
+function SentimentChart(props) {
   const options = {
     indexAxis: 'y',
     elements: {
-      bar: {
-        borderWidth: 1,
-        barThickness: 0.5
-      },
+      bar: { borderWidth: 1, barThickness: 0.5 },
     },
     responsive: true,
     plugins: {
-      legend: {
-        display: false,
-        position: 'right'
-      },
+      legend: { display: false, position: 'right' },
       title: {
         display: true,
-        text: `Sentiment Analysis Result of Conversation ID #${props.data.conversationId}`,
+        text: `Sentiment Analysis Result`,
       },
     },
     scales: {
       x: {
-        title: {
-          display: true,
-          text: "Percentage of sentiment"
-        },
+        title: { display: true, text: "Percentage of sentiment" },
         suggestedMin: 0,
         suggestedMax: 100
       }
@@ -72,10 +62,10 @@ function Conversation(props) {
   };
 
   return (
-    <div className={classes.chart_container}>
+    <div className={classes.container}>
       <Bar options={options} data={data} />
     </div>
   )
 }
 
-export default Conversation
+export default SentimentChart

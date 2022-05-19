@@ -12,7 +12,7 @@ function SentimentList(props) {
     <ul className={classes.sentiment__list}>
       {
         props.listData.map(result => {
-          const key = result.conversationId ? result.conversationId : result.userId
+          const key = result.conversationId
           return <SentimentListItem data={result} key={key}/>
         })
       }
