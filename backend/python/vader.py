@@ -73,7 +73,11 @@ def process_tweets_comments_vader(http_resp):
 
 
 def analyze_sentimental_recent_posts_of_user(username, max_tweets=None, start_time=None, end_time=None):
-    print('Analyzing for user %s ...' % (username))
+    print('analyze_sentimental_recent_posts_of_user')
+    print(username)
+    print(max_tweets)
+    print(start_time)
+    print(end_time)
     resp_tw = get_tweets_by_user(username, max_tweets, start_time, end_time)
     data = resp_tw.json()
     # print(data)
@@ -116,7 +120,11 @@ def analyze_sentimental_recent_posts_of_user(username, max_tweets=None, start_ti
 
 
 def analyze_sentimental_recent_post(conversation_id, max_tweets=None, start_time=None, end_time=None):
-    print('Analyzing for conversation_id %s ...' % (conversation_id))
+    print('analyze_sentimental_recent_post')
+    print(conversation_id)
+    print(max_tweets)
+    print(start_time)
+    print(end_time)
     resp = get_tweet_comments(
         conversation_id, max_tweets, start_time, end_time)
     # print(resp)

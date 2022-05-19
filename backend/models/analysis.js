@@ -1,8 +1,11 @@
 const path = require('path')
+const fs = require('fs')
 const { spawn } = require('child_process');
 
 const utils = require('../utils')
 const syncWithClients = require('../sync-with-clients')
+
+const DATA_DIR = path.join(__dirname, '..', 'data')
 
 const scriptVader = path.join(__dirname, '..', 'python', 'vader.py')
 const scriptLstm = path.join(__dirname, '..', 'python', 'lstm.py')
@@ -27,22 +30,32 @@ const vader = (id, filter, callback) => {
   changeStatus(STATUS_BUSY)
 
   const resultId = utils.generateResultId()
-  const maxTweets = filter.maxTweets ? filter.maxTweets : 1000
+  const { maxTweets, startTime, endTime } = filter
 
-  let python
+  let args
   if (!utils.isStringNumber(id)) {
     // username case
-    const args = [scriptVader, '--username', id, '--max-tweets', maxTweets, '--output', `${resultId}`]
-    console.log(args)
-    python = spawn('python', args, { cwd: currentWorkingWindow });
+    args = [scriptVader,
+      '--username', id,
+      '--max-tweets', maxTweets,
+      '--start-time', startTime,
+      '--end-time', endTime,
+      '--output', `${resultId}`]
   } else {
     // conversation id case
-    const args = [scriptVader, '--conversation-id', id, '--max-tweets', maxTweets, '--output', `${resultId}`]
-    console.log(args)
-    python = spawn('python', args, { cwd: currentWorkingWindow });
+    args = [scriptVader,
+      '--conversation-id', id,
+      '--max-tweets', maxTweets,
+      '--start-time', startTime,
+      '--end-time', endTime,
+      '--output', `${resultId}`]
   }
+  console.log(args)
+  const stdoutFile = fs.openSync(path.join(DATA_DIR, 'varder.stdout.txt'), 'w');
+  const python = spawn('python', args, { cwd: currentWorkingWindow, stdio: [process.stdin, stdoutFile, process.stderr] });
 
   python.on('close', (code) => {
+    fs.closeSync(stdoutFile)
     console.log(`child process close all stdio with code ${code}`);
     changeStatus(STATUS_READY)
     if (code === 0) {
@@ -57,22 +70,32 @@ const lstm = (id, filter, callback) => {
   changeStatus(STATUS_BUSY)
 
   const resultId = utils.generateResultId()
-  const maxTweets = filter.maxTweets ? filter.maxTweets : 1000
+  const { maxTweets, startTime, endTime } = filter
 
-  let python
+  let args
   if (!utils.isStringNumber(id)) {
     // username case
-    const args = [scriptLstm, '--username', id, '--max-tweets', maxTweets, '--output', `${resultId}`]
-    console.log(args)
-    python = spawn('python', args, { cwd: currentWorkingWindow });
+    args = [scriptLstm,
+      '--username', id,
+      '--max-tweets', maxTweets,
+      '--start-time', startTime,
+      '--end-time', endTime,
+      '--output', `${resultId}`]
   } else {
     // conversation id case
-    const args = [scriptLstm, '--conversation-id', id, '--max-tweets', maxTweets, '--output', `${resultId}`]
-    console.log(args)
-    python = spawn('python', args, { cwd: currentWorkingWindow });
+    args = [scriptLstm,
+      '--conversation-id', id,
+      '--max-tweets', maxTweets,
+      '--start-time', startTime,
+      '--end-time', endTime,
+      '--output', `${resultId}`]
   }
+  console.log(args)
+  const stdoutFile = fs.openSync(path.join(DATA_DIR, 'lstm.stdout.txt'), 'w');
+  const python = spawn('python', args, { cwd: currentWorkingWindow, stdio: [process.stdin, stdoutFile, process.stderr] });
 
   python.on('close', (code) => {
+    fs.closeSync(stdoutFile)
     console.log(`child process close all stdio with code ${code}`);
     changeStatus(STATUS_READY)
     if (code === 0) {
