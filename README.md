@@ -5,7 +5,7 @@
 - npm 8.1.2
 - python 3.10.1
 #### Steps
-- Git clone & Checkout branch 'integration'
+- Git clone & Checkout branch 'main'
 - Build (bundle) frontend application
 ```
 # go to directory 'frontend/react-app'

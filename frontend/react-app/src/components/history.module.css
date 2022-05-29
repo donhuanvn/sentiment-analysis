@@ -1,0 +1,29 @@
+.history {
+  background: #f1f1f1;
+  border-left: 2px solid #8d8d8d;
+  width: 360px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  visibility: visible;
+}
+.history__header {
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+.history__logo {
+  display: inline-block;
+  text-align: center;
+  width: 90%;
+}
+.history__close__btn {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+.history__close__btn:hover {
+  cursor: pointer;
+}

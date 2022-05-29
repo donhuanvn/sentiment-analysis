@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IS | Sentiment Analysis</title>
+  <link rel="stylesheet" href="../shared.css">
+  <link rel="stylesheet" href="visual.css">
+</head>
+
+<body>
+  <header>
+    <form action="" id="form__url">
+      <h1 id="logo">
+        <a href="../index.html">Sentiment Analysis</a>
+      </h1>
+      <div class="input__url">
+        <img src="../images/user.png" alt="user icon">
+        <input type="text" name="user" id="user">
+        <img src="../images/edit.png" alt="edit icon" class="img__edit">
+      </div>
+      <div class="buttons">
+        <button type="submit" class="button" id="button__analysis">Analysis</button>
+        <button class="button" id="button__history">History</button>
+      </div>
+    </form>
+  </header>
+  <main>
+    <ul class="result__list">
+      <li class="result__item">
+        <div>
+          Sentiment Analysis Result of tweet #123
+        </div>
+      </li>
+      <li class="result__item">
+        <div>
+          Sentiment Analysis Result of tweet #123
+        </div>
+      </li>
+      <li class="result__item">
+        <div>
+          Sentiment Analysis Result of tweet #123
+        </div>
+      </li>
+      <li class="result__item">
+        <div>
+          Sentiment Analysis Result of tweet #123
+        </div>
+      </li>
+      <li class="result__item">
+        <div>
+          Sentiment Analysis Result of tweet #123
+        </div>
+      </li>
+      <li class="result__item">
+        <div>
+          Sentiment Analysis Result of tweet #123
+        </div>
+      </li>
+      <li class="result__item">
+        <div>
+          Sentiment Analysis Result of tweet #123
+        </div>
+      </li>
+      <li class="result__item">
+        <div>
+          Sentiment Analysis Result of tweet #123
+        </div>
+      </li>
+      <li class="result__item">
+        <div>
+          Sentiment Analysis Result of tweet #123
+        </div>
+      </li>
+      <li class="result__item">
+        <div>
+          Sentiment Analysis Result of tweet #123
+        </div>
+      </li>
+    </ul>
+    <div class="history" id="history">
+      <div class="history__header">
+        <h1 class="history__logo">History</h1>
+        <img id="history__close__btn" class="history__close__btn" src="../images/close.png">
+      </div>
+      <ul class="history__list">
+        <li class="history__item">
+          <a href="#">
+            <h3>Twitter User A</h3>
+            <div>
+              <span>URL: </span>
+              <span>https://twitter.com/twitter_user_a_123</span>
+            </div>
+            <div>
+              <span>Analysis Time: </span>
+              <span>11:44 PM 07/05/2022</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </main>
+  <div class="status">
+    <p>Analyzer is ready!</p>
+    <div class="loading"><div></div><div></div><div></div></div>
+  </div>
+  <div class="filter">
+    <h1>Filter</h1>
+    <form class="form__filter">
+      <div class="form-control__filter">
+        <label for="maxTweets">Maximum Tweets</label>
+        <input type="number" name="maxTweets" placeholder="1000"/>
+      </div>
+      <div class="form-control__filter">
+        <label for="maxTweets">Start Time</label>
+        <input type="datetime" name="maxTweets" placeholder="2022/05/18 06:00"/>
+      </div>
+      <div class="form-control__filter">
+        <label for="maxTweets">End Time</label>
+        <input type="datetime" name="maxTweets" placeholder="2022/05/18 08:00"/>
+      </div>
+      <button type="submit">OK</button>
+      <button type="submit">Cancel</button>
+    </form>
+  </div>
+  <div class="backdrop"></div>
+  <script src="../test.js">
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+.sentiment__item {
+  width: 97%;
+  min-height: 200px;
+  border: 1px solid #8d8d8d;
+  border-radius: 5px;
+  margin-top: 16px;
+  padding: 8px 16px;
+  background: white;
+  position: relative;
+}
+.sentiment__item:first-of-type {
+  margin-top: 22px;
+}
+.sentiment__item:last-of-type {
+  margin-bottom: 64px;
+}
+.sentiment__item h1 {
+  font-size: 1rem;
+  text-align: center;
+}
+.sentiment__item * {
+  overflow: hidden;
+}
+.review {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+.chart {
+  display: inline-block;
+  width: 45%;
+  margin-left: 20px;
+  vertical-align: middle;
+}
